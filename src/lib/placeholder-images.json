@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "trust-logo-1",
+      "description": "Vertex Capital logo",
+      "imageUrl": "https://images.unsplash.com/photo-1755435140567-3c9df5ceffa1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxsb2dvJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzY2NzMyMDkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo abstract"
+    },
+    {
+      "id": "trust-logo-2",
+      "description": "QuantumLeap Finance logo",
+      "imageUrl": "https://images.unsplash.com/photo-1723790011180-73be054b6c31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bG9nbyUyMGFic3RyYWN0fGVufDB8fHx8MTc2NjczMjA5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo abstract"
+    },
+    {
+      "id": "trust-logo-3",
+      "description": "Apex Traders logo",
+      "imageUrl": "https://images.unsplash.com/photo-1754837369018-ff35655d126f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dvJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzY2NzMyMDkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo abstract"
+    },
+    {
+      "id": "trust-logo-4",
+      "description": "Momentum Insights logo",
+      "imageUrl": "https://images.unsplash.com/photo-1747862712508-e1290330085f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsb2dvJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzY2NzMyMDkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo abstract"
+    },
+    {
+      "id": "trust-logo-5",
+      "description": "Stellar Invest logo",
+      "imageUrl": "https://images.unsplash.com/photo-1747862712508-e1290330085f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsb2dvJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzY2NzMyMDkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo abstract"
+    }
+  ]
 }
