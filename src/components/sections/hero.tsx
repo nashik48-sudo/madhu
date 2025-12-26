@@ -12,7 +12,7 @@ export function Hero() {
           Access ultra-low latency, real-time, and 15+ years of historical market data through our powerful WebSocket and RESTful APIs. Built for developers, by developers.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button asChild size="lg">
+          <Button asChild size="lg" variant="destructive">
             <Link href="#final-cta">Get Your Free API Key</Link>
           </Button>
           <Button asChild size="lg" variant="outline">

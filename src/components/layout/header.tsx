@@ -53,7 +53,7 @@ export function Header() {
           </nav>
         </div>
         <div className="hidden items-center gap-4 md:flex">
-          <Button asChild>
+          <Button asChild variant="destructive">
             <Link href="#final-cta">Get Free API Key</Link>
           </Button>
         </div>
@@ -75,7 +75,7 @@ export function Header() {
                                 </Link>
                             ))}
                         </nav>
-                        <Button asChild className="mt-4">
+                        <Button asChild className="mt-4" variant="destructive">
                           <Link href="#final-cta">Get Free API Key</Link>
                         </Button>
                     </div>
