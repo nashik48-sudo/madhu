@@ -1,0 +1,151 @@
+/**
+ * Core Philosophy: This ruleset enforces a strict user-ownership security model.
+ * User data is private and can only be accessed by the authenticated owner.
+ * Public data, such as subscription tiers and market data, is globally readable
+ * by any client but is not writable, ensuring data integrity.
+ *
+ * Data Structure: The data is organized into two main categories:
+ * 1. User-specific data, nested under `/users/{userId}`. This includes the user's
+ *    profile, API usage logs, and API keys.
+ * 2. Public, top-level collections for shared application data like
+ *    `/subscriptionTiers` and `/marketData`.
+ *
+ * Key Security Decisions:
+ * - User Isolation: A user can only ever access documents within their own
+ *   data tree (i.e., under their own `/users/{userId}` path).
+ * - No User Listing: It is not possible for any client to list all documents
+ *   in the top-level `/users` collection, protecting user privacy.
+ * - Read-Only Public Data: Collections intended for public consumption
+ *   (`subscriptionTiers`, `marketData`) are strictly read-only for clients.
+ *   This prevents unauthorized modification and assumes that this data is
+ *   managed by a trusted backend service using the Admin SDK.
+ * - Default Secure: Any path not explicitly matched is inaccessible.
+ *
+ * Denormalization for Authorization: The rules rely on a path-based ownership
+ * model. The `userId` in the document path is the primary source of truth for
+ * authorization. To ensure data integrity, create and update operations on
+ * user-owned documents validate that an internal `userId` field matches the
+ * `userId` from the document path.
+ *
+ * Structural Segregation: Private user data (profiles, api keys) is strictly
+ * segregated from public data (market data, subscription tiers) by placing them
+ * in separate top-level collections. This simplifies rules and makes queries
+ * more secure and performant, as a client can never accidentally query for
+ * another user's private data.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ------------------------------------------------------------------------
+    // Helper Functions
+    // ------------------------------------------------------------------------
+
+    /**
+     * Checks if a user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the authenticated user's UID matches the provided userId.
+     * This is the primary function for enforcing document ownership.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+
+    /**
+     * Checks for ownership on existing documents for update/delete operations.
+     * Combines the ownership check with a check that the resource exists.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && resource != null;
+    }
+
+    // ------------------------------------------------------------------------
+    // User Profile Rules (`/users`)
+    // ------------------------------------------------------------------------
+
+    /**
+     * @description Controls access to a user's own profile document.
+     * @path /users/{userId}
+     * @allow (create) An authenticated user creating their own user profile document.
+     * @deny (get) An authenticated user trying to read another user's profile.
+     * @principle Restricts access to a user's own data tree and enforces self-creation.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false; // Explicitly deny listing all users for security.
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
+
+      // ----------------------------------------------------------------------
+      // User Subcollection Rules (`/users/{userId}/*`)
+      // ----------------------------------------------------------------------
+
+      /**
+       * @description Controls access to a user's private API usage records.
+       * @path /users/{userId}/apiUsage/{apiUsageId}
+       * @allow (list) An authenticated user listing their own API usage.
+       * @deny (get) An authenticated user trying to read another user's API usage.
+       * @principle Enforces document ownership for subcollections.
+       */
+      match /apiUsage/{apiUsageId} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && request.resource.data.userId == userId;
+        allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+        allow delete: if isExistingOwner(userId);
+      }
+
+      /**
+       * @description Controls access to a user's private API keys.
+       * @path /users/{userId}/apiKeys/{apiKeyId}
+       * @allow (create) An authenticated user creating a new API key for themselves.
+       * @deny (delete) An authenticated user trying to delete another user's API key.
+       * @principle Enforces document ownership for subcollections.
+       */
+      match /apiKeys/{apiKeyId} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && request.resource.data.userId == userId;
+        allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+        allow delete: if isExistingOwner(userId);
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // Public Read-Only Collections
+    // ------------------------------------------------------------------------
+
+    /**
+     * @description Provides public read access to subscription tier information.
+     * @path /subscriptionTiers/{subscriptionTierId}
+     * @allow (get, list) Any user (authenticated or not) reading subscription plans.
+     * @deny (create, update, delete) Any client trying to modify subscription data.
+     * @principle Secures administrative data by making it read-only for clients.
+     */
+    match /subscriptionTiers/{subscriptionTierId} {
+      allow get, list: if true;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Provides public read access to market data.
+     * @path /marketData/{marketDataId}
+     * @allow (get, list) Any user (authenticated or not) reading market data.
+     * @deny (create, update, delete) Any client trying to modify market data.
+     * @principle Secures public data by making it read-only for clients.
+     */
+    match /marketData/{marketDataId} {
+      allow get, list: if true;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}
