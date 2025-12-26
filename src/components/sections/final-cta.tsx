@@ -6,14 +6,14 @@ export function FinalCta() {
     <section id="final-cta" className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-16 text-center md:px-6 md:py-24">
         <h2 className="font-headline text-3xl font-bold sm:text-4xl">
-          Ready to Build with Better Data?
+          Unlock the power of data-driven insights.
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/80">
-          Sign up now and get your free API key instantly. Start building with institutional-grade data today.
+        <p className="mx-auto mt-4 max-w-2xl text-primary-foreground/80">
+          Join thousands of developers and traders who use EquityStream to stay ahead of the curve. Get your free API key today.
         </p>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="#">Get Your Free API Key</Link>
+            <Link href="#">Get Free API Key</Link>
           </Button>
         </div>
       </div>

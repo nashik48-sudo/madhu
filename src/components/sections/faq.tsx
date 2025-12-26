@@ -2,20 +2,20 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 
 const faqs = [
   {
-    question: "What is the typical latency for your real-time data?",
-    answer: "Our WebSocket streams are designed for ultra-low latency, typically under 50ms from exchange to your application. We achieve this through a globally distributed network of servers located in major financial data centers."
+    question: "How does EquityStream ensure data accuracy?",
+    answer: "We source our data from reputable financial data providers and use a multi-layered verification process to ensure the highest level of accuracy for all our market data and insights."
   },
   {
-    question: "Are there any additional exchange fees I need to worry about?",
-    answer: "No. Our pricing is all-inclusive. We handle all exchange licensing and fees, so the price you see is the price you pay. This simplifies your accounting and removes unpredictable costs."
+    question: "Can I integrate EquityStream with my trading platform?",
+    answer: "Yes! EquityStream offers a powerful API that allows for seamless integration with a wide range of trading platforms, brokerage accounts, and other financial tools."
   },
   {
-    question: "How deep does your historical data go?",
-    answer: "We offer over 15 years of comprehensive historical data for most US equities, including tick-level data, OHLCV (Open, High, Low, Close, Volume) bars down to one-minute intervals, and corporate actions."
+    question: "What kind of support can I expect?",
+    answer: "We offer 24/7 email support for all users. Our Pro and Enterprise plans include priority support and a dedicated account manager to ensure you get the most out of our platform."
   },
   {
-    question: "What kind of support do you offer?",
-    answer: "We offer community support for our free plan, email support for our Pro plan, and dedicated 24/7 phone and Slack support for Enterprise customers. All plans have access to our extensive documentation."
+    question: "Is there a free trial available for the API?",
+    answer: "Absolutely. You can sign up and get a free API key to test our data and insights with our free developer plan. No credit card required."
   },
 ];
 

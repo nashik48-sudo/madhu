@@ -53,8 +53,11 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
+          <Button variant="ghost" asChild>
+            <Link href="#">Login</Link>
+          </Button>
           <Button asChild>
             <Link href="#final-cta">Get Free API Key</Link>
           </Button>
@@ -78,9 +81,14 @@ export function Header() {
                                 </Link>
                             ))}
                         </nav>
-                        <Button asChild className="mt-4">
-                          <Link href="#final-cta">Get Free API Key</Link>
-                        </Button>
+                         <div className="mt-4 flex flex-col gap-2">
+                           <Button variant="ghost" asChild>
+                              <Link href="#">Login</Link>
+                           </Button>
+                           <Button asChild>
+                              <Link href="#final-cta">Get Free API Key</Link>
+                           </Button>
+                        </div>
                     </div>
                 </SheetContent>
             </Sheet>

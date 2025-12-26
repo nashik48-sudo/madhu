@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'EquityStream | Institutional-Grade Data at Startup Speed',
-  description: 'Access ultra-low latency, real-time, and 15+ years of historical market data through our powerful WebSocket and RESTful APIs.',
+  title: 'EquityStream | Data-driven insights for financial markets',
+  description: 'EquityStream provides real-time data analysis and AI-powered insights to help you navigate the complexities of the financial markets.',
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className={cn('font-body antialiased')}>
         <ThemeProvider
