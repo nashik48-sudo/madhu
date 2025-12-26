@@ -18,7 +18,7 @@ export function Hero() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button asChild size="lg">
-            <Link href="#final-cta">Get Your Free API Key</Link>
+            <Link href="/signup">Get Your Free API Key</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
             <Link href="#features">Explore Features</Link>

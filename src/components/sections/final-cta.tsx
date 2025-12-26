@@ -13,7 +13,7 @@ export function FinalCta() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="#">Get Free API Key</Link>
+            <Link href="/signup">Get Free API Key</Link>
           </Button>
         </div>
       </div>

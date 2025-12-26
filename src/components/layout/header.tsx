@@ -11,6 +11,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { ThemeToggle } from '../theme-toggle';
+import { useUser, useAuth } from '@/firebase';
+import { signOut } from 'firebase/auth';
 
 const navLinks = [
   { href: '#features', label: 'Features' },
@@ -20,6 +22,8 @@ const navLinks = [
 
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const { user, isUserLoading } = useUser();
+  const auth = useAuth();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +34,10 @@ export function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
 
   return (
     <header
@@ -55,12 +63,20 @@ export function Header() {
         </div>
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
-          <Button variant="ghost" asChild>
-            <Link href="#">Login</Link>
-          </Button>
-          <Button asChild>
-            <Link href="#final-cta">Get Free API Key</Link>
-          </Button>
+          {!isUserLoading && (
+            user ? (
+              <Button variant="ghost" onClick={handleLogout}>Logout</Button>
+            ) : (
+              <>
+                <Button variant="ghost" asChild>
+                  <Link href="/login">Login</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/signup">Get Free API Key</Link>
+                </Button>
+              </>
+            )
+          )}
         </div>
         <div className="flex items-center gap-2 md:hidden">
             <ThemeToggle />
@@ -82,12 +98,20 @@ export function Header() {
                             ))}
                         </nav>
                          <div className="mt-4 flex flex-col gap-2">
-                           <Button variant="ghost" asChild>
-                              <Link href="#">Login</Link>
-                           </Button>
-                           <Button asChild>
-                              <Link href="#final-cta">Get Free API Key</Link>
-                           </Button>
+                           {!isUserLoading && (
+                              user ? (
+                                <Button variant="ghost" onClick={handleLogout}>Logout</Button>
+                              ) : (
+                                <>
+                                  <Button variant="ghost" asChild>
+                                    <Link href="/login">Login</Link>
+                                  </Button>
+                                  <Button asChild>
+                                    <Link href="/signup">Get Free API Key</Link>
+                                  </Button>
+                                </>
+                              )
+                           )}
                         </div>
                     </div>
                 </SheetContent>
