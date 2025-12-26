@@ -10,6 +10,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { ThemeToggle } from '../theme-toggle';
 
 const navLinks = [
   { href: '#features', label: 'Features' },
@@ -53,11 +54,13 @@ export function Header() {
           </nav>
         </div>
         <div className="hidden items-center gap-4 md:flex">
-          <Button asChild variant="destructive">
+          <ThemeToggle />
+          <Button asChild>
             <Link href="#final-cta">Get Free API Key</Link>
           </Button>
         </div>
-        <div className="md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <Sheet>
                 <SheetTrigger asChild>
                     <Button variant="outline" size="icon">
@@ -75,7 +78,7 @@ export function Header() {
                                 </Link>
                             ))}
                         </nav>
-                        <Button asChild className="mt-4" variant="destructive">
+                        <Button asChild className="mt-4">
                           <Link href="#final-cta">Get Free API Key</Link>
                         </Button>
                     </div>
